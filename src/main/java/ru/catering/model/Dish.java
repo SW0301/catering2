@@ -1,4 +1,4 @@
-package ru.catering_vrn.model;
+package ru.catering.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +15,7 @@ public class Dish {
     private String name;
 
     @Column(name = "cooking_time")
-    private short cooking_time;
+    private short cookingTime;
 
     @Column(name = "price")
     private BigDecimal price;
@@ -25,7 +25,7 @@ public class Dish {
 
     @ManyToOne
     @Column(name = "kitchen_id")
-    private Kitchen kitchen_id;
+    private Kitchen kitchenId;
 
     @Column(name = "is_deleted")
     private boolean deleted;
@@ -46,12 +46,12 @@ public class Dish {
         this.name = name;
     }
 
-    public short getCooking_time() {
-        return cooking_time;
+    public short getCookingTime() {
+        return cookingTime;
     }
 
-    public void setCooking_time(short cooking_time) {
-        this.cooking_time = cooking_time;
+    public void setCookingTime(short cookingTime) {
+        this.cookingTime = cookingTime;
     }
 
     public BigDecimal getPrice() {
@@ -70,12 +70,12 @@ public class Dish {
         this.weight = weight;
     }
 
-    public Kitchen getKitchen_id() {
-        return kitchen_id;
+    public Kitchen getKitchenId() {
+        return kitchenId;
     }
 
-    public void setKitchen_id(Kitchen kitchen_id) {
-        this.kitchen_id = kitchen_id;
+    public void setKitchenId(Kitchen kitchenId) {
+        this.kitchenId = kitchenId;
     }
 
     public boolean isDeleted() {

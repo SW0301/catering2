@@ -1,10 +1,10 @@
-package ru.catering_vrn.model;
+package ru.catering.model;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="pguser", schema = "public")
-public class Pguser {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -14,7 +14,7 @@ public class Pguser {
     private String name;
 
     @Column(name = "last_name")
-    private String last_name;
+    private String lastName;
 
     @Column(name = "patronymic")
     private String patronymic;
@@ -26,7 +26,8 @@ public class Pguser {
     private String password;
 
     @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "mail")
     private String mail;
@@ -50,12 +51,12 @@ public class Pguser {
         this.name = name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPatronymic() {
@@ -82,11 +83,11 @@ public class Pguser {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

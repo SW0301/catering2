@@ -1,22 +1,23 @@
-package ru.catering_vrn.model;
+package ru.catering.model;
 
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="pgorder", schema = "public")
-public class Pgorder {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "date")
-    private String date;
+    private LocalDateTime date;
 
     @Column(name = "total_price")
-    private BigDecimal total_price;
+    private BigDecimal totalPrice;
 
     @Column(name = "address")
     private String address;
@@ -25,11 +26,12 @@ public class Pgorder {
     private String telephone;
 
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
-    private Pguser user_id;
+    private User userId;
 
     @Column(name = "is_deleted")
     private boolean deleted;
@@ -42,20 +44,20 @@ public class Pgorder {
         this.id = id;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public BigDecimal getTotal_price() {
-        return total_price;
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotal_price(BigDecimal total_price) {
-        this.total_price = total_price;
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public String getAddress() {
@@ -74,20 +76,20 @@ public class Pgorder {
         this.telephone = telephone;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public Pguser getUser_id() {
-        return user_id;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Pguser user_id) {
-        this.user_id = user_id;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     public boolean isDeleted() {

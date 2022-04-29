@@ -1,4 +1,4 @@
-package ru.catering_vrn.model;
+package ru.catering.model;
 
 
 import javax.persistence.*;
@@ -8,16 +8,19 @@ import javax.persistence.*;
 public class Cook {
 
     @Id
-    @ManyToOne
+    @Column (name = "id")
+    private Long id;
+
+    @OneToOne
     @JoinColumn(name = "id")
-    private Pguser id;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name="grade_id")
-    private Grade grade_id;
+    private Grade gradeId;
 
     @Column(name="getting_started")
-    private String getting_sterted;
+    private String gettingStarted;
 
     @Column(name="rating")
     private double rating;
@@ -25,28 +28,36 @@ public class Cook {
     @Column(name="about")
     private String about;
 
-    public Pguser getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Pguser id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Grade getGrade_id() {
-        return grade_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setGrade_id(Grade grade_id) {
-        this.grade_id = grade_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getGetting_sterted() {
-        return getting_sterted;
+    public Grade getGradeId() {
+        return gradeId;
     }
 
-    public void setGetting_sterted(String getting_sterted) {
-        this.getting_sterted = getting_sterted;
+    public void setGradeId(Grade gradeId) {
+        this.gradeId = gradeId;
+    }
+
+    public String getGettingStarted() {
+        return gettingStarted;
+    }
+
+    public void setGettingStarted(String gettingStarted) {
+        this.gettingStarted = gettingStarted;
     }
 
     public double getRating() {
