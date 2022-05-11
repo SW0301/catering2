@@ -10,26 +10,26 @@ public class DishIngredient {
     @Id
     @ManyToOne
     @JoinColumn(name = "dish_id")
-    private Dish dishId;
+    private Dish dish;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
-    private Ingredient ingredientId;
+    private Ingredient ingredient;
 
-    public Dish getDishId() {
-        return dishId;
+    public Dish getDish() {
+        return dish;
     }
 
-    public void setDishId(Dish dishId) {
-        this.dishId = dishId;
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 
-    public Ingredient getIngredientId() {
-        return ingredientId;
+    public Ingredient getIngredient() {
+        return ingredient;
     }
 
-    public void setIngredientId(Ingredient ingredientId) {
-        this.ingredientId = ingredientId;
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
     }
 }

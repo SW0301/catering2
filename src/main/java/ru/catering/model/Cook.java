@@ -17,7 +17,7 @@ public class Cook {
 
     @ManyToOne
     @JoinColumn(name="grade_id")
-    private Grade gradeId;
+    private Grade grade;
 
     @Column(name="getting_started")
     private String gettingStarted;
@@ -44,12 +44,12 @@ public class Cook {
         this.user = user;
     }
 
-    public Grade getGradeId() {
-        return gradeId;
+    public Grade getGrade() {
+        return grade;
     }
 
-    public void setGradeId(Grade gradeId) {
-        this.gradeId = gradeId;
+    public void setGrade(Grade grade) {
+        this.grade = grade;
     }
 
     public String getGettingStarted() {

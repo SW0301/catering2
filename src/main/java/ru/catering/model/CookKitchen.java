@@ -9,26 +9,26 @@ public class CookKitchen {
     @Id
     @ManyToOne
     @JoinColumn(name = "cook_id")
-    private Cook cookId;
+    private Cook cook;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "kitchen_id")
-    private Kitchen kithcenId;
+    private Kitchen kithcen;
 
-    public Cook getCookId() {
-        return cookId;
+    public Cook getCook() {
+        return cook;
     }
 
-    public void setCookId(Cook cookId) {
-        this.cookId = cookId;
+    public void setCook(Cook cook) {
+        this.cook = cook;
     }
 
-    public Kitchen getKithcenId() {
-        return kithcenId;
+    public Kitchen getKithcen() {
+        return kithcen;
     }
 
-    public void setKithcenId(Kitchen kithcenId) {
-        this.kithcenId = kithcenId;
+    public void setKithcen(Kitchen kithcen) {
+        this.kithcen = kithcen;
     }
 }

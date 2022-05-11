@@ -25,7 +25,7 @@ public class Dish {
 
     @ManyToOne
     @Column(name = "kitchen_id")
-    private Kitchen kitchenId;
+    private Kitchen kitchen;
 
     @Column(name = "is_deleted")
     private boolean deleted;
@@ -70,12 +70,12 @@ public class Dish {
         this.weight = weight;
     }
 
-    public Kitchen getKitchenId() {
-        return kitchenId;
+    public Kitchen getKitchen() {
+        return kitchen;
     }
 
-    public void setKitchenId(Kitchen kitchenId) {
-        this.kitchenId = kitchenId;
+    public void setKitchen(Kitchen kitchen) {
+        this.kitchen = kitchen;
     }
 
     public boolean isDeleted() {

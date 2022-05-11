@@ -31,7 +31,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn (name = "user_id")
-    private User userId;
+    private User user;
 
     @Column(name = "is_deleted")
     private boolean deleted;
@@ -84,12 +84,12 @@ public class Order {
         this.status = status;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public boolean isDeleted() {

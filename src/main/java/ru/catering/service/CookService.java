@@ -12,7 +12,7 @@ public class CookService {
 
     public Long createCook(Cook cookFromAdmin){
         Cook cook = new Cook();
-        cook.setGradeId(cookFromAdmin.getGradeId());
+        cook.setGrade(cookFromAdmin.getGrade());
         cook.setGettingStarted(cookFromAdmin.getGettingStarted());
         cook.setRating(cookFromAdmin.getRating());
         cook.setAbout(cookFromAdmin.getAbout());

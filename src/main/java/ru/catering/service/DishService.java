@@ -17,7 +17,7 @@ public class DishService {
         dish.setCookingTime(dishFromAdmin.getCookingTime());
         dish.setPrice(dishFromAdmin.getPrice());
         dish.setWeight(dishFromAdmin.getWeight());
-        dish.setKitchenId(dishFromAdmin.getKitchenId());
+        dish.setKitchen(dishFromAdmin.getKitchen());
         dish.setDeleted(false);
         dishRepository.save(dish);
         return dish.getId();

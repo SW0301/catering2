@@ -19,7 +19,7 @@ public class OrderService {
         order.setAddress(orderFromClient.getAddress());
         order.setTelephone(orderFromClient.getTelephone());
         order.setStatus(orderFromClient.getStatus());
-        order.setUserId(orderFromClient.getUserId());
+        order.setUser(orderFromClient.getUser());
         order.setDeleted(false);
         orderRepository.save(order);
         return order.getId();

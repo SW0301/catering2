@@ -9,27 +9,27 @@ public class CookDish {
     @Id
     @ManyToOne
     @JoinColumn(name = "cook_id")
-    private Cook cookId;
+    private Cook cook;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "dish_id")
-    private Dish dishId;
+    private Dish dish;
 
 
-    public Cook getCookId() {
-        return cookId;
+    public Cook getCook() {
+        return cook;
     }
 
-    public void setCookId(Cook cookId) {
-        this.cookId = cookId;
+    public void setCook(Cook cook) {
+        this.cook = cook;
     }
 
-    public Dish getDishId() {
-        return dishId;
+    public Dish getDish() {
+        return dish;
     }
 
-    public void setDishId(Dish dishId) {
-        this.dishId = dishId;
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 }

@@ -10,43 +10,43 @@ public class OrderDish {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order orderId;
+    private Order order;
 
 
     @ManyToOne
     @JoinColumn(name = "dish_id")
-    private Dish dishId;
+    private Dish dish;
 
 
     @ManyToOne
     @JoinColumn(name = "cook_id")
-    private Cook cookId;
+    private Cook cook;
 
     @Column(name = "count")
     private short count;
 
-    public Order getOrderId() {
-        return orderId;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderId(Order orderId) {
-        this.orderId = orderId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public Dish getDishId() {
-        return dishId;
+    public Dish getDish() {
+        return dish;
     }
 
-    public void setDishId(Dish dishId) {
-        this.dishId = dishId;
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 
-    public Cook getCookId() {
-        return cookId;
+    public Cook getCook() {
+        return cook;
     }
 
-    public void setCookId(Cook cookId) {
-        this.cookId = cookId;
+    public void setCook(Cook cook) {
+        this.cook = cook;
     }
 
     public short getCount() {
