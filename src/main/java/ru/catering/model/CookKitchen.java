@@ -1,20 +1,40 @@
 package ru.catering.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="cook_kitchen", schema = "public")
 public class CookKitchen {
 
-    @Id
+    @Data
+    @Embeddable
+    public static class CrossId implements Serializable{
+        private Long cook_id;
+
+        private Long kitchen_id;
+    }
+
+    @EmbeddedId
+    private CrossId cookKitchenId;
+
     @ManyToOne
-    @JoinColumn(name = "cook_id")
+    @JoinColumn(name = "cook_id", referencedColumnName = "id")
     private Cook cook;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "kitchen_id")
-    private Kitchen kithcen;
+    @JoinColumn(name = "kitchen_id", referencedColumnName = "id")
+    private Kitchen kitchen;
+
+    public CrossId getCookKitchenId() {
+        return cookKitchenId;
+    }
+
+    public void setCookKitchenId(CrossId cookKitchenId) {
+        this.cookKitchenId = cookKitchenId;
+    }
 
     public Cook getCook() {
         return cook;
@@ -24,11 +44,11 @@ public class CookKitchen {
         this.cook = cook;
     }
 
-    public Kitchen getKithcen() {
-        return kithcen;
+    public Kitchen getKitchen() {
+        return kitchen;
     }
 
-    public void setKithcen(Kitchen kithcen) {
-        this.kithcen = kithcen;
+    public void setKitchen(Kitchen kitchen) {
+        this.kitchen = kitchen;
     }
 }
