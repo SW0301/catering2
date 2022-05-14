@@ -1,8 +1,9 @@
 package ru.catering.service;
 
+import org.springframework.stereotype.Service;
 import ru.catering.model.Order;
 import ru.catering.repository.OrderRepository;
-
+@Service
 public class OrderService {
 
     private final OrderRepository orderRepository;

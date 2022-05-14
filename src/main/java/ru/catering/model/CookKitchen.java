@@ -21,11 +21,11 @@ public class CookKitchen {
     private CrossId cookKitchenId;
 
     @ManyToOne
-    @JoinColumn(name = "cook_id", referencedColumnName = "id")
+    @JoinColumn(name = "cook_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Cook cook;
 
     @ManyToOne
-    @JoinColumn(name = "kitchen_id", referencedColumnName = "id")
+    @JoinColumn(name = "kitchen_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Kitchen kitchen;
 
     public CrossId getCookKitchenId() {

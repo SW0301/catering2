@@ -22,12 +22,12 @@ public class CookDish {
 
 
     @ManyToOne
-    @JoinColumn(name = "cook_id", referencedColumnName = "id")
+    @JoinColumn(name = "cook_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Cook cook;
 
 
     @ManyToOne
-    @JoinColumn(name = "dish_id", referencedColumnName = "id")
+    @JoinColumn(name = "dish_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Dish dish;
 
     public CrossId getCookDishId() {

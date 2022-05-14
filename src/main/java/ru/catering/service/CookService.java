@@ -1,8 +1,10 @@
 package ru.catering.service;
 
+import org.springframework.stereotype.Service;
 import ru.catering.model.Cook;
 import ru.catering.repository.CookRepository;
 
+@Service
 public class CookService {
     private final CookRepository cookRepository;
 

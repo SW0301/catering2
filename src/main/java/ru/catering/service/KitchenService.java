@@ -1,7 +1,9 @@
 package ru.catering.service;
 
+import org.springframework.stereotype.Service;
 import ru.catering.model.Kitchen;
 import ru.catering.repository.KitchenRepository;
+@Service
 
 public class KitchenService {
     private final KitchenRepository kitchenRepository;

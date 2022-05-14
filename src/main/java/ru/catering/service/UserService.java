@@ -1,8 +1,9 @@
 package ru.catering.service;
 
+import org.springframework.stereotype.Service;
 import ru.catering.model.User;
 import ru.catering.repository.UserRepository;
-
+@Service
 public class UserService {
 
     private final UserRepository userRepository;

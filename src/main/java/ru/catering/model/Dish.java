@@ -24,7 +24,7 @@ public class Dish {
     private short weight;
 
     @ManyToOne
-    @Column(name = "kitchen_id")
+    @JoinColumn(name = "kitchen_id")
     private Kitchen kitchen;
 
     @Column(name = "is_deleted")

@@ -1,8 +1,10 @@
 package ru.catering.service;
 
+import org.springframework.stereotype.Service;
 import ru.catering.model.Grade;
 import ru.catering.repository.GradeRepository;
 
+@Service
 public class GradeService {
     private final GradeRepository gradeRepository;
 

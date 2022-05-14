@@ -1,6 +1,8 @@
 package ru.catering.model;
 
 
+import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -19,8 +21,9 @@ public class Cook {
     @JoinColumn(name="grade_id")
     private Grade grade;
 
+    @Temporal(TemporalType.DATE)
     @Column(name="getting_started")
-    private String gettingStarted;
+    private Date gettingStarted;
 
     @Column(name="rating")
     private double rating;
@@ -52,11 +55,11 @@ public class Cook {
         this.grade = grade;
     }
 
-    public String getGettingStarted() {
+    public Date getGettingStarted() {
         return gettingStarted;
     }
 
-    public void setGettingStarted(String gettingStarted) {
+    public void setGettingStarted(Date gettingStarted) {
         this.gettingStarted = gettingStarted;
     }
 

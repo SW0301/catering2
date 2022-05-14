@@ -1,12 +1,26 @@
 package ru.catering.model;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Table(name="order_dish", schema = "public")
 public class OrderDish {
 
+
+    @Data
+    @Embeddable
+    public static class CrossId implements Serializable {
+        private Long order_id;
+        private Long dish_id;
+        private Long cook_id;
+    }
+
+    @EmbeddedId
+    private CrossId orderDishId;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
@@ -24,6 +38,14 @@ public class OrderDish {
 
     @Column(name = "count")
     private short count;
+
+    public CrossId getOrderDishId() {
+        return orderDishId;
+    }
+
+    public void setOrderDishId(CrossId orderDishId) {
+        this.orderDishId = orderDishId;
+    }
 
     public Order getOrder() {
         return order;

@@ -1,8 +1,10 @@
 package ru.catering.service;
 
+import org.springframework.stereotype.Service;
 import ru.catering.model.Ingredient;
 import ru.catering.repository.IngredientRepository;
 
+@Service
 public class IngredientService {
 
     private final IngredientRepository ingredientRepository;
