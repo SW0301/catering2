@@ -1,17 +1,19 @@
 package ru.catering.model;
 
-import javax.persistence.*;
+import ru.catering.model.directory.Kitchen;
+
 import java.math.BigDecimal;
+import javax.persistence.*;
 
 @Entity
-@Table(name="dish", schema = "public")
+@Table(name = "dish", schema = "public")
 public class Dish {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column  (name = "name")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "cooking_time")
@@ -23,12 +25,12 @@ public class Dish {
     @Column(name = "weight")
     private short weight;
 
+    @Column(name = "is_deleted")
+    private boolean deleted;
+
     @ManyToOne
     @JoinColumn(name = "kitchen_id")
     private Kitchen kitchen;
-
-    @Column(name = "is_deleted")
-    private boolean deleted;
 
     public Long getId() {
         return id;

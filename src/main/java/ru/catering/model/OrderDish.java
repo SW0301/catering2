@@ -3,39 +3,25 @@ package ru.catering.model;
 
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.*;
 
 
-@Table(name="order_dish", schema = "public")
+@Table(name = "order_dish", schema = "public")
 public class OrderDish {
 
 
-    @Data
-    @Embeddable
-    public static class CrossId implements Serializable {
-        private Long order_id;
-        private Long dish_id;
-        private Long cook_id;
-    }
-
     @EmbeddedId
     private CrossId orderDishId;
-
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
-
-
     @ManyToOne
     @JoinColumn(name = "dish_id")
     private Dish dish;
-
-
     @ManyToOne
     @JoinColumn(name = "cook_id")
     private Cook cook;
-
     @Column(name = "count")
     private short count;
 
@@ -77,5 +63,13 @@ public class OrderDish {
 
     public void setCount(short count) {
         this.count = count;
+    }
+
+    @Data
+    @Embeddable
+    public static class CrossId implements Serializable {
+        private Long order_id;
+        private Long dish_id;
+        private Long cook_id;
     }
 }

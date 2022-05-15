@@ -3,14 +3,14 @@ package ru.catering.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="pguser", schema = "public")
+@Table(name = "pguser", schema = "public")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column  (name = "name")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "last_name")

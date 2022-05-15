@@ -1,31 +1,22 @@
 package ru.catering.model;
 
 import lombok.Data;
+import ru.catering.model.directory.Kitchen;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.*;
 
 @Entity
-@Table(name="cook_kitchen", schema = "public")
+@Table(name = "cook_kitchen", schema = "public")
 public class CookKitchen {
-
-    @Data
-    @Embeddable
-    public static class CrossId implements Serializable{
-        private Long cook_id;
-
-        private Long kitchen_id;
-    }
 
     @EmbeddedId
     private CrossId cookKitchenId;
-
     @ManyToOne
-    @JoinColumn(name = "cook_id", referencedColumnName = "id", insertable=false, updatable=false)
+    @JoinColumn(name = "cook_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Cook cook;
-
     @ManyToOne
-    @JoinColumn(name = "kitchen_id", referencedColumnName = "id", insertable=false, updatable=false)
+    @JoinColumn(name = "kitchen_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Kitchen kitchen;
 
     public CrossId getCookKitchenId() {
@@ -50,5 +41,13 @@ public class CookKitchen {
 
     public void setKitchen(Kitchen kitchen) {
         this.kitchen = kitchen;
+    }
+
+    @Data
+    @Embeddable
+    public static class CrossId implements Serializable {
+        private Long cook_id;
+
+        private Long kitchen_id;
     }
 }
