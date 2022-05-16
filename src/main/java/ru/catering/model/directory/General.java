@@ -1,20 +1,17 @@
-package ru.catering.model;
+package ru.catering.model.directory;
 
 import javax.persistence.*;
 
 @MappedSuperclass
-public class General {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-
+public abstract class General {
 
     @Column(name = "name")
     protected String name;
-
     @Column(name = "is_deleted")
     protected boolean deleted;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     public Long getId() {
         return id;

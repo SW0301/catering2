@@ -1,12 +1,12 @@
 package ru.catering.model;
 
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import javax.persistence.*;
 
 @Entity
-@Table(name="pgorder", schema = "public")
+@Table(name = "pgorder", schema = "public")
 public class Order {
 
     @Id
@@ -30,7 +30,7 @@ public class Order {
     private Status status;
 
     @ManyToOne
-    @JoinColumn (name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "is_deleted")

@@ -11,16 +11,22 @@ public class DishController {
     private DishService dishService;
 
     @Autowired
-    public void setDishService(DishService dishService){
-        this.dishService = dishService;}
-
-    @PostMapping(value = "/dish/create")
-    public void createDish(@RequestBody Dish dishFromAdmin){
-        dishService.createDish(dishFromAdmin);
+    public void setDishService(DishService dishService) {
+        this.dishService = dishService;
     }
 
-    @GetMapping(value = "/dish/get")
-    public Dish getDishById(@RequestParam Long id){return dishService.getDish(id);}
+    @PostMapping(value = "/dish")
+    public Long createDish(@RequestBody Dish dishFromAdmin) {
+        return dishService.createDish(dishFromAdmin);
+    }
 
+    @GetMapping(value = "/dish")
+    public Dish getDishById(@RequestParam Long id) {
+        return dishService.getDish(id);
+    }
 
+    @DeleteMapping(value = "/dish/{dishId}")
+    public void deleteFish(@PathVariable Long dishId) {
+        dishService.deleteDish(dishId);
+    }
 }

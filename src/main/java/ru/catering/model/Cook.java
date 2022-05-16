@@ -1,35 +1,36 @@
 package ru.catering.model;
 
 
-import java.time.LocalDate;
+import ru.catering.model.directory.Grade;
+
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@Table(name="cook", schema = "public")
+@Table(name = "cook", schema = "public")
 public class Cook {
 
     @Id
-    @Column (name = "id")
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "about")
+    private String about;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "getting_started")
+    private Date gettingStarted;
+
+    @Column(name = "rating")
+    private double rating;
+
+    @ManyToOne
+    @JoinColumn(name = "grade_id")
+    private Grade grade;
 
     @OneToOne
     @JoinColumn(name = "id")
     private User user;
-
-    @ManyToOne
-    @JoinColumn(name="grade_id")
-    private Grade grade;
-
-    @Temporal(TemporalType.DATE)
-    @Column(name="getting_started")
-    private Date gettingStarted;
-
-    @Column(name="rating")
-    private double rating;
-
-    @Column(name="about")
-    private String about;
 
     public Long getId() {
         return id;

@@ -2,30 +2,22 @@ package ru.catering.model;
 
 
 import lombok.Data;
+import ru.catering.model.directory.Ingredient;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.*;
 
 @Entity
-@Table(name="dish_ingredient", schema = "public")
+@Table(name = "dish_ingredient", schema = "public")
 public class DishIngredient {
 
-    @Data
-    @Embeddable
-    public static class CrossId implements Serializable {
-        private Long dish_id;
-        private Long ingredient_id;
-    }
     @EmbeddedId
     private CrossId dishIngredientId;
-
     @ManyToOne
-    @JoinColumn(name = "dish_id", referencedColumnName = "id", insertable=false, updatable=false)
+    @JoinColumn(name = "dish_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Dish dish;
-
-
     @ManyToOne
-    @JoinColumn(name = "ingredient_id", referencedColumnName = "id", insertable=false, updatable=false)
+    @JoinColumn(name = "ingredient_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Ingredient ingredient;
 
     public CrossId getDishIngredientId() {
@@ -50,5 +42,12 @@ public class DishIngredient {
 
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
+    }
+
+    @Data
+    @Embeddable
+    public static class CrossId implements Serializable {
+        private Long dish_id;
+        private Long ingredient_id;
     }
 }

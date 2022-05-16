@@ -8,17 +8,26 @@ import ru.catering.service.UserService;
 
 @RestController
 public class UserController {
+
     private UserService userService;
 
     @Autowired
-    public void setUserService(UserService userService){
-        this.userService = userService;}
-
-    @PostMapping(value = "/user/create")
-    public void createUser(@RequestBody User userFromAdmin){
-        userService.createUser(userFromAdmin);
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping(value = "/user/get")
-    public User getUserById(@RequestParam Long id){return userService.getUser(id);}
+    @PostMapping(value = "/user")
+    public Long createUser(@RequestBody User userFromAdmin) {
+        return userService.createUser(userFromAdmin);
+    }
+
+    @GetMapping(value = "/user")
+    public User getUserById(@RequestParam Long id) {
+        return userService.getUser(id);
+    }
+
+    @DeleteMapping(value = "/user/{userId}")
+    public void deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
+    }
 }
