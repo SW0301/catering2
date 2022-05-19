@@ -20,8 +20,8 @@ public class GradeController {
         return gradeService.createGrade(gradeFromAdmin);
     }
 
-    @GetMapping(value = "/grade")
-    public Grade getGradeById(@RequestParam Long id) {
+    @GetMapping(value = "/grade/{id}")
+    public Grade getGradeById(@PathVariable Long id) {
         return gradeService.getGrade(id);
     }
 

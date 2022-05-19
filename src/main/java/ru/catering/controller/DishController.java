@@ -20,8 +20,8 @@ public class DishController {
         return dishService.createDish(dishFromAdmin);
     }
 
-    @GetMapping(value = "/dish")
-    public Dish getDishById(@RequestParam Long id) {
+    @GetMapping(value = "/dish/{id}")
+    public Dish getDishById(@PathVariable Long id) {
         return dishService.getDish(id);
     }
 

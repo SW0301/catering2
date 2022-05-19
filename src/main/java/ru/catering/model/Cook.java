@@ -1,11 +1,13 @@
 package ru.catering.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ru.catering.model.directory.Grade;
 
 import java.util.Date;
 import javax.persistence.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
 @Table(name = "cook", schema = "public")
 public class Cook {

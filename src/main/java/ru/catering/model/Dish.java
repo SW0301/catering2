@@ -1,10 +1,12 @@
 package ru.catering.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ru.catering.model.directory.Kitchen;
 
 import java.math.BigDecimal;
 import javax.persistence.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
 @Table(name = "dish", schema = "public")
 public class Dish {
