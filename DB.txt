@@ -1,0 +1,275 @@
+DROP TABLE IF EXISTS cook CASCADE;
+DROP TABLE IF EXISTS dish CASCADE;
+DROP TABLE IF EXISTS kitchen CASCADE;
+DROP TABLE IF EXISTS cook_kitchen CASCADE;
+DROP TABLE IF EXISTS cook_dish CASCADE;
+DROP TABLE IF EXISTS grade CASCADE;
+DROP TABLE IF EXISTS order_dish CASCADE;
+DROP TABLE IF EXISTS ingredient CASCADE;
+DROP TABLE IF EXISTS dish_ingredient CASCADE;
+DROP TABLE IF EXISTS pgorder CASCADE;
+DROP TABLE IF EXISTS pguser CASCADE;
+
+
+
+CREATE TABLE cook
+(
+	id bigserial PRIMARY KEY,
+	grade_id bigint NOT NULL,
+	getting_started date NOT NULL,
+	rating float NOT NULL,
+	about text
+);
+CREATE TABLE dish
+(
+	id bigserial PRIMARY KEY,
+	name varchar(30) NOT NULL,
+	cooking_time smallint NOT NULL,
+	price numeric NOT NULL,
+	weight smallint NOT NULL,
+	kitchen_id bigint NOT NULL,
+	is_deleted bool NOT NULL
+);
+CREATE TABLE ingredient
+(
+	id bigserial PRIMARY KEY,
+	name  varchar(25) NOT NULL,
+	category varchar(25) NOT NULL,
+	is_deleted bool NOT NULL
+);
+CREATE TABLE kitchen
+(
+	id bigserial PRIMARY KEY,
+	name varchar(25) NOT NULL,
+	is_deleted bool NOT NULL
+);
+CREATE TABLE grade
+(
+	id bigserial PRIMARY KEY,
+	name varchar(25) NOT NULL,
+	is_deleted bool NOT NULL
+);
+CREATE TABLE pgorder
+(
+	id bigserial PRIMARY KEY,
+	date timestamp with time zone NOT NULL,
+	total_price numeric,
+	address varchar(80) NOT NULL,
+	telephone varchar(12) NOT NULL,
+	status varchar(25) NOT NULL,
+	user_id bigint NOT NULL,
+	is_deleted bool NOT NULL
+);
+CREATE TABLE pguser
+(
+	id bigserial PRIMARY KEY,
+	name varchar(25) NOT NULL,
+	last_name varchar(25) NOT NULL,
+	patronymic varchar(25),
+	login varchar(25) NOT NULL UNIQUE,
+	password varchar(34) NOT NULL,
+	role varchar(25) NOT NULL,
+	mail varchar(50) NOT NULL,
+	is_deleted bool NOT NULL
+);
+
+
+
+CREATE TABLE order_dish
+(
+	order_id bigint REFERENCES pgorder(id),
+	dish_id bigint REFERENCES dish(id),
+	cook_id bigint REFERENCES cook(id),
+	count smallint NOT NULL
+);
+CREATE TABLE cook_kitchen
+(
+	cook_id bigint REFERENCES cook(id),
+	kitchen_id bigint REFERENCES kitchen(id),
+	CONSTRAINT cook_kitchen_pkey PRIMARY KEY (cook_id, kitchen_id)
+);
+CREATE TABLE cook_dish
+(
+	cook_id bigint REFERENCES cook(id),
+	dish_id bigint REFERENCES dish(id),
+	CONSTRAINT cook_dish_pkey PRIMARY KEY (cook_id, dish_id)
+);
+CREATE TABLE dish_ingredient
+(
+	dish_id bigint REFERENCES dish(id),
+	ingredient_id bigint REFERENCES ingredient(id)
+);
+
+ALTER TABLE cook
+ADD CONSTRAINT FK_cook_user FOREIGN KEY (id) REFERENCES pguser(id);
+ALTER TABLE pgorder
+ADD CONSTRAINT FK_order_user FOREIGN KEY (user_id) REFERENCES pguser(id);
+ALTER TABLE cook
+ADD CONSTRAINT FK_cook_grade FOREIGN KEY (grade_id) REFERENCES grade(id);
+ALTER TABLE dish
+ADD CONSTRAINT FK_dish_kitchen FOREIGN KEY (kitchen_id) REFERENCES kitchen(id);
+
+INSERT INTO grade (name, is_deleted)
+VALUES
+('Шеф-повар',false),
+('Су-шеф',false),
+('Старший шеф',false),
+('Повар',false);
+
+INSERT INTO ingredient (name, category, is_deleted)
+VALUES
+('Говядина','Мясо',false),
+('Лук репчатый','Овощ',false),
+('Тофу','Другое',false),
+('Пшеничная лапша удон','Другое',false),
+('Соевый соус','Приправа',false),
+('Сахар белый','Приправа',false),
+('Яйца','Другое',false),
+('Баклажан','Овощ',false),
+('Перец болгарский','Овощ',false),
+('Картофель','Овощ',false),
+('Чеснок','Овощ',false),
+('Масло оливковое','Масло',false),
+('Соль','Приправа',false),
+('Дрожжи','Другое',false),
+('Масло сливочное','Масло',false),
+('Молоко','Молочный продукт',false),
+('Мука','Другое',false),
+('Куриная грудка','Мясо',false),
+('Тертый имбирь','Овощ',false),
+('Апельсин','Фрукт',false),
+('Рисовый уксус','Приправа',false),
+('Рисовое вино','Алкоголь',false),
+('Сакэ','Алкоголь',false),
+('Филе трески','Морепродукт',false),
+('Печень трески','Морепродукт',false),
+('Морковь','Овощ',false),
+('Подсолнечное масло','Масло',false),
+('Перец черный молотый','Приправа',false),
+('Рис','Овощ',false),
+('Семга слабосоленая','Морепродукт',false),
+('Кабачок','Овощ',false),
+('Помидор','Овощ',false),
+('Сливки','Молочный продукт',false),
+('Крахмал рисовый','Другое',false),
+('Фарш свино-говяжий','Мясо',false),
+('Масло кунжутное','Масло',false),
+('Корица','Приправа',false),
+('Ванильный экстракт','Приправа',false),
+('Сахар коричневый','Приправа',false),
+('Яблоки','Фрукт',false),
+('Лимон','Фрукт',false),
+('Филе-миньон','Мясо',false),
+('Лук шарлот','Овощ',false),
+('Красное вино','Алкоголь',false),
+('Тимьян','Приправа',false);
+
+INSERT INTO pguser(name, last_name, patronymic, login, password, role, mail, is_deleted)
+VALUES
+('Алексей','Смирнов','Сергеевич','alexsm', '123456', 'Повар','alexsm@gmail.com', false),
+('Евгений','Иванов','Викторович','ivanov01', '123231','Повар','ivanov_01@list.ru',false),
+('Виктор','Баринов','Петрович','best_cook_01','2435673','Повар','bestcook01@yandex.ru',false),
+('Синьхуа','Бао','','ohaio','4674562345','Повар','omaevamuuu@gmail.com',false),
+('Сома','Юкихира','','123123123','246735','Повар','araarasayonara@gmail.com',false),
+('Эрина','Накири','','asqdxcv','5684653','Повар','asqdxcv2112@yahoo.jp',false),
+('Мария','Тарасова','Евгеньевна','8929292912','235673468','Повар','marusia02@yandex.ru',false),
+('Элен','Дарроз','','nihao0201','21456357','Повар','nihao0201@gmail.com',false),
+('Иван','Комаров','Яковлевич','komariv','124542435dfg','Повар','komariv_02123@mail.ru',false),
+('Павел','Григорьев','Александрович','kavoisho','23qewertsdfb','Повар','kavoisho@box.ru',false),
+('Александр','Карташов','Сергеевич','kartashov_01','12431413235565','Пользователь','kartashov_01@list.ru',false);
+
+
+INSERT INTO cook(id, grade_id, getting_started, rating)
+VALUES 
+(1, 3, '2017-5-3', 4.4),
+(2, 2, '2015-6-3', 4.1),
+(3, 1, '2007-2-25', 4.9),
+(4, 3, '2012-11-8', 4.8),
+(5, 1, '2017-7-18', 5),
+(6, 1, '2017-7-19', 4.7),
+(7, 3, '2019-12-11', 4.7),
+(8, 1, '1990-12-2', 4.9),
+(9, 4, '2016-11-23', 3.8),
+(10, 3,'2019-10-16', 3.9);
+
+INSERT INTO kitchen (name, is_deleted)
+VALUES 
+('Россия',false),
+('Франция',false),
+('Япония',false),
+('Китай',false),
+('Англия',false),
+('США',false),
+('Украина',false),
+('Мексика',false),
+('Германия',false),
+('Испания',false);
+
+INSERT INTO dish(name, cooking_time, price, weight, kitchen_id, is_deleted)
+VALUES
+('Сукияки', 75, 500, 300, 3,false),
+('Чинаси', 60, 300, 150, 4,false),
+('Курица по-пекински', 20, 600, 400, 4,false),
+('Пирожки в духовке', 120, 200, 300, 1,false),
+('Уха', 35, 400, 300, 1,false),
+('Онигири', 50, 500, 200, 3,false),
+('Рататуй', 90, 200, 150, 2,false),
+('Грибной суп со сливками', 50, 400, 400, 2,false),
+('Цзяоцзы', 90, 400, 330, 4,false),
+('Яблочный крамбл', 30, 300, 200, 5,false),
+('Стейк филе-миньон', 30, 880, 300, 5,false);
+
+INSERT INTO pgorder(date,total_price, address, telephone, status, user_id, is_deleted)
+VALUES 
+('2021-12-11 19:50', 1200,'Московский проспект 90к1 кв 1','89102825205','Выполнен',11,false),
+('2022-01-22 21:03', 5000,'Московский проспект 90к1 кв 1','89102825205','Выполнен',11,false),
+('2022-02-16 23:52', 5000,'Московский проспект 90к1 кв 1','89102825205','Выполнен',11,false),
+('2022-03-08 8:31', 5000,'Московский проспект 90к1 кв 1','89102825205','Выполнен',11,false);
+
+INSERT INTO dish_ingredient
+VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,7),(1,6),(1,1),(1,22),(1,23),
+(2,8),(2,9),(2,10),(2,11),(2,5),(2,6),(2,12),(2,13),
+(3,18),(3,5),(3,7),(3,17),(3,27),(3,11),(3,19),(3,20),(3,39),(3,21),
+(4,16),(4,17),(4,15),(4,14),(4,7),(4,13),(4,6),
+(5,24),(5,25),(5,2),(5,26),(5,27),(5,16),(5,13),(5,28),(5,10),
+(6,29),(6,30),(6,5),(6,6),(6,13),(6,21),
+(7,8),(7,31),(7,32),(7,2),(7,9),(7,11),(7,12),(7,13),
+(8,2),(8,10),(8,33),(8,15),(8,13),(8,28),
+(9,17),(9,34),(9,35),(9,36),(9,13),(9,19),(9,28),(9,5),(9,7),(9,11),
+(10,6),(10,39),(10,37),(10,38),(10,40),(10,41),(10,17),(10,15),
+(11,42),(11,13),(11,28),(11,12),(11,43),(11,44),(11,45),(11,15),(11,11);
+
+INSERT INTO cook_dish
+VALUES 
+(1,4), (1,5), 
+(2,10), (2,11), 
+(3,7), (3,8), 
+(4,3), (4,9), 
+(5, 1), (5,2),(5,3), (5, 6), (5, 7), (5, 8), (5,9), 
+(6,2), (6,3), (6,7), (6,8), 
+(7,4), (7,5), 
+(8,7), (8,8), 
+(9,10), (9,11), 
+(10,2), (10,9);
+
+INSERT INTO cook_kitchen 
+VALUES (1,1), 
+(2,5), 
+(3,2), 
+(4,4), 
+(5,2), (5,3), (5,4), 
+(6, 2), (6,4), 
+(7,1), 
+(8,2), 
+(9,5), 
+(10, 4);
+
+INSERT INTO order_dish
+VALUES (1, 3, 4, 2),(2, 3, 4,3),(2, 10, 9,3),(2, 11, 9,3),(3, 3, 4,3),(3, 10, 2,3),(3, 11, 2,3),(4, 3, 4,3),(4, 10, 9,3),(4, 11, 9,3);
+
+/*SELECT * FROM pg_extension;
+CREATE EXTENSION pgcrypto;*/
+
+UPDATE pguser SET password = crypt(password, gen_salt('md5')); 
+
+/*SELECT * FROM pguser  WHERE password = crypt('23qewertsdfb', password);*/
