@@ -25,7 +25,7 @@ public class GradeController {
         return gradeService.getGrade(id);
     }
 
-    @DeleteMapping(value = "/dish/{gradeId}")
+    @DeleteMapping(value = "/grade/{gradeId}")
     public void deleteGrade(@PathVariable Long gradeId) {
         gradeService.deleteGrade(gradeId);
     }

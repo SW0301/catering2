@@ -1,12 +1,14 @@
 package ru.catering.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Table(name = "order_dish", schema = "public")
 public class OrderDish {
 
