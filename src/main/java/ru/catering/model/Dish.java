@@ -30,6 +30,17 @@ public class Dish {
     @Column(name = "is_deleted")
     private boolean deleted;
 
+    @Column(name="dish_type")
+    private String dishType;
+
+    public String getDishType() {
+        return dishType;
+    }
+
+    public void setDishType(String dishType) {
+        this.dishType = dishType;
+    }
+
     @ManyToOne
     @JoinColumn(name = "kitchen_id")
     private Kitchen kitchen;

@@ -23,7 +23,7 @@ public class UserService {
         user.setPassword(userFromClient.getPassword());
         user.setRole(userFromClient.getRole());
         user.setMail(userFromClient.getMail());
-        user.setDeleted(false);
+//        user.setDeleted(false);
         return userRepository.save(user).getId();
     }
 

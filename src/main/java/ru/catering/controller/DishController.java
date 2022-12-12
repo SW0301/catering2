@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.catering.model.Dish;
 import ru.catering.service.DishService;
 
+import java.util.List;
+
 @RestController
 public class DishController {
 
@@ -28,5 +30,19 @@ public class DishController {
     @DeleteMapping(value = "/dish/{dishId}")
     public void deleteFish(@PathVariable Long dishId) {
         dishService.deleteDish(dishId);
+    }
+
+    @GetMapping(value="/dish/all")
+    public List<Dish> findAll(){
+        return dishService.findAll();
+    }
+
+    @GetMapping(value="/dish/correl")
+    public double getCorrelation(@RequestParam String param){
+        return dishService.correlWithPrice(param);
+    }
+    @GetMapping(value = "/dish/distanceBetweenValues")
+    public double[][] distanceBetweenValues(@RequestParam String param){
+        return dishService.distanceBetweenValues(param);
     }
 }
