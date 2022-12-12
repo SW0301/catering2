@@ -33,6 +33,18 @@ public class Dish {
     @Column(name="dish_type")
     private String dishType;
 
+    @Column(name="main_ingredient")
+    private String mainIngredient;
+
+
+    public String getMainIngredient() {
+        return mainIngredient;
+    }
+
+    public void setMainIngredient(String mainIngredient) {
+        this.mainIngredient = mainIngredient;
+    }
+
     public String getDishType() {
         return dishType;
     }

@@ -24,6 +24,7 @@ public class DishService {
         dish.setKitchen(dishFromAdmin.getKitchen());
         dish.setDeleted(false);
         dish.setDishType(dishFromAdmin.getDishType());
+        dish.setMainIngredient(dish.getMainIngredient());
         return dishRepository.save(dish).getId();
     }
 
@@ -45,6 +46,7 @@ public class DishService {
     public double correlWithPrice(String x){
         double correl=0;
         List<Dish> dishList = findAll();
+        int dishListSize = dishList.size();
         double y = 0;
         double firstSqrSum=0;
         double priceSqrSum=0;
@@ -59,10 +61,33 @@ public class DishService {
         else if(x.equals("weight")){
             for(Dish d:dishList) {
                 y += (double) d.getWeight() * d.getPrice().doubleValue();
-                firstSqrSum += Math.pow((double) d.getWeight(),2);
+                firstSqrSum += Math.pow(d.getWeight(),2);
                 priceSqrSum += Math.pow(d.getPrice().doubleValue(),2);
             }
             correl=y/Math.sqrt(firstSqrSum*priceSqrSum);
+        }
+        else if(x.equals("dish_type")){
+            String[] avgPriceOfSameTypes = dishRepository.findGroupedAvgType();
+            for(int i=0; i<dishListSize; i++){
+                for(int j=0; j<avgPriceOfSameTypes.length;j++){
+                    if(dishList.get(i).getDishType().equals(avgPriceOfSameTypes[j])){
+                        firstSqrSum+=Math.pow(j+1,2);
+                    }
+                }
+            }
+            correl=1-6*(firstSqrSum)/(dishListSize*(Math.pow(dishListSize,2)-1));
+
+        }
+        else if(x.equals("main_ingredient")){
+            String[] avgPriceOfMainIngredients = dishRepository.findGroupedAvgIngredient();
+            for(int i=0; i<dishListSize; i++){
+                for(int j = 0; j< avgPriceOfMainIngredients.length; j++){
+                    if(dishList.get(i).getMainIngredient().equals(avgPriceOfMainIngredients[j])){
+                        firstSqrSum+=Math.pow(j+1,2);
+                    }
+                }
+            }
+            correl=1-6*(firstSqrSum)/(dishListSize*(Math.pow(dishListSize,2)-1));
         }
         return correl;
     }
